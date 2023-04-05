@@ -20,7 +20,7 @@ public class UserRepositoryImpl implements UserRepository {
     public List<User> getUsers() {
         var getUsers = """
                 select *
-                from user u
+                from person
                 """.trim();
 
         return jdbcTemplate.query(getUsers, userRowMapper());

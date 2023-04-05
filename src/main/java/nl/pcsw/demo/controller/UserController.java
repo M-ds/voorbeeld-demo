@@ -1,6 +1,6 @@
 package nl.pcsw.demo.controller;
 
-import java.util.List;
+import nl.pcsw.demo.controller.response.UserResponse;
 import nl.pcsw.demo.serivce.UserService;
 import nl.pcsw.demo.serivce.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +18,16 @@ public class UserController {
     }
 
     @GetMapping("/users")
-    public List<UserDto> getUsers() {
-        return userService.getUsers();
+    public UserResponse getUsers() {
+        var persons = userService.getUsers();
+        UserResponse userResponse = new UserResponse();
+
+        if (persons.isEmpty()) {
+            return userResponse;
+        }
+
+        userResponse.setPersons(persons);
+        return userResponse;
     }
 
 }
